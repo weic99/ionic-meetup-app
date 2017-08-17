@@ -10,9 +10,29 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class UserProvider {
+  private _user: any;
 
   constructor(public http: Http) {
-    console.log('Hello UserProvider Provider');
+
   }
 
+  /** Send a POST request to login endpoint */
+  login(accountInfo: any) {
+
+  }
+
+  /** Send a POST request to signup endpoint */
+  signup(accountInfo: any) {
+
+  }
+
+  /** Log out user */
+  logout() {
+
+  }
+
+  /** Store user data */
+  private _loggedIn(res) {
+
+  }
 }
