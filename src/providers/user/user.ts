@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { ApiProvider } from '../api/api';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the UserProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class UserProvider {
   private _user: any;
 
-  constructor(public http: Http) {
-
+  constructor(
+    public http: Http,
+    private api: ApiProvider
+  ) {
   }
 
   /** Send a POST request to login endpoint */
@@ -23,7 +20,19 @@ export class UserProvider {
 
   /** Send a POST request to signup endpoint */
   signup(accountInfo: any) {
+    let seq = this.api.post('signup', accountInfo);
 
+    seq
+      .map((res) => res.json())
+      .subscribe((res) => {
+        if (res.status === 'success') {
+          this._loggedIn(res);
+        }
+      }, (err) => {
+        console.error('signup', err);
+      });
+
+    return seq;
   }
 
   /** Log out user */
