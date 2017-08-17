@@ -9,7 +9,10 @@ import { HomePage } from '../../pages/home/home';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  account: { email: string, password: string };
+  public account: { username: string, password: string } = {
+    username: undefined,
+    password: undefined
+  };
 
   private loginErrorString: string = 'Failed to login';
 
@@ -27,7 +30,7 @@ export class LoginPage {
 
   login() {
     this.User.login(this.account).subscribe((res) => {
-      this.navCtrl.push(HomePage);
+      this.navCtrl.push(HomePage, res);
     }, (err) => {
       this.navCtrl.push(HomePage);
 

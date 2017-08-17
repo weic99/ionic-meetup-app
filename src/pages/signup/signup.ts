@@ -32,7 +32,7 @@ export class SignupPage {
 
   signup() {
     this.User.signup(this.account).subscribe((res) => {
-      this.navCtrl.push(HomePage);
+      this.navCtrl.push(HomePage, res);
     }, (err) => {
       // this.navCtrl.push(HomePage);
 
