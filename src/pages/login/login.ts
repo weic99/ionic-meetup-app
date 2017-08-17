@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { UserProvider } from '../../providers/user/user';
+import { HomePage } from '../../pages/home/home';
 
 @IonicPage()
 @Component({
@@ -7,13 +9,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  user = {};
+  account: { email: string, password: string };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private loginErrorString: string = 'Failed to login';
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private toast: ToastController,
+    private User: UserProvider
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
+  login() {
+    this.User.login(this.account).subscribe((res) => {
+      this.navCtrl.push(MainPage);
+    }, (err) => {
+      this.navCtrl.push(MainPage);
+
+      this.toast.create({
+        message: this.loginErrorString,
+        duration: 2000,
+        position: 'top'
+      }).present();
+    });
+  }
 }

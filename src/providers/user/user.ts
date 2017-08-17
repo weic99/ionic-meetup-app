@@ -15,7 +15,21 @@ export class UserProvider {
 
   /** Send a POST request to login endpoint */
   login(accountInfo: any) {
+    let seq = this.api.post('login', accountInfo);
 
+    seq
+      .map((res) => res.json())
+      .subscribe((res) => {
+        if (res.status === 'success') {
+          this._loggedIn(res);
+        } else {
+          /** fail to login */
+        }
+      }, (err) => {
+        console.error('login', err);
+      });
+
+    return seq;
   }
 
   /** Send a POST request to signup endpoint */
@@ -37,11 +51,11 @@ export class UserProvider {
 
   /** Log out user */
   logout() {
-
+    this._user = null;
   }
 
   /** Store user data */
   private _loggedIn(res) {
-
+    this._user = res.user;
   }
 }

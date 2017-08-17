@@ -11,7 +11,7 @@ import { HomePage } from '../../pages/home/home';
 export class SignupPage {
   account: { username: string, email: string, password: string };
 
-  private signupErrorString: string = 'Sign up failed.';
+  private signupErrorString: string = 'Sign up failed';
 
   constructor(
     public navCtrl: NavController,
