@@ -27,9 +27,9 @@ export class LoginPage {
 
   login() {
     this.User.login(this.account).subscribe((res) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(HomePage);
     }, (err) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(HomePage);
 
       this.toast.create({
         message: this.loginErrorString,
