@@ -9,7 +9,11 @@ import { HomePage } from '../../pages/home/home';
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-  account: { username: string, email: string, password: string };
+  public account: { username: string, email: string, password: string } = {
+    username: undefined,
+    email: undefined,
+    password: undefined
+  };
 
   private signupErrorString: string = 'Sign up failed';
 
@@ -30,7 +34,7 @@ export class SignupPage {
     this.User.signup(this.account).subscribe((res) => {
       this.navCtrl.push(HomePage);
     }, (err) => {
-      this.navCtrl.push(HomePage);
+      // this.navCtrl.push(HomePage);
 
       this.toast.create({
         message: this.signupErrorString,
