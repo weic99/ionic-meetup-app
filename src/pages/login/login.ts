@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { UserProvider } from '../../providers/user/user';
 import { HomePage } from '../../pages/home/home';
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -32,7 +31,7 @@ export class LoginPage {
     this.User.login(this.account).subscribe((res) => {
       this.navCtrl.push(HomePage, res);
     }, (err) => {
-      this.navCtrl.push(HomePage);
+      // this.navCtrl.push(HomePage);
 
       this.toast.create({
         message: this.loginErrorString,
