@@ -7,5 +7,24 @@
 <ion-content padding>
   <h2 *ngIf="user">Hello, {{ user.username }} !</h2>
 
+  <form (submit)="match()">
+    <ion-list>
+      <ion-item>
+        <ion-label>Your friend's name</ion-label>
+        <ion-input type="text" [(ngModel)]="friendName" name="friendName" required></ion-input>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-label fixed>Something else</ion-label>
+        <ion-input type="text" [(ngModel)]="userLocationAddress" name=""></ion-input>
+      </ion-item> -->
+
+      <div padding>
+        <button ion-button color="primary" block>Go</button>
+      </div>
+
+    </ion-list>
+  </form>
+
   <div #map id="map" style="height:75%;"></div>
 </ion-content>

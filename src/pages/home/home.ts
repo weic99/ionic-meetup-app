@@ -14,6 +14,10 @@ export class HomePage {
   map: any;
   @ViewChild('map') mapElement: ElementRef;
 
+  /** Matching bariables */
+  friendName: string;
+  userLocationAddress: string;
+
   constructor(
     public navCtrl: NavController,
     private navParams: NavParams,
@@ -26,15 +30,8 @@ export class HomePage {
     this.user = JSON.parse(this.navParams.get('_body') || null) || {username: 'Guest'};
 
     // if (!this.user) {
-    //   this.toast.create({
-    //     message: 'Failed to load user data'
-    //   }).present();
-    // }
-
-    // if (!this.user) {
     //   this.navCtrl.push(LoginPage);
     // }
-
   }
 
   ionViewDidLoad() {
@@ -52,7 +49,31 @@ export class HomePage {
     };
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    this.addMarker();
   }
 
+  addMarker(){
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter(),
+      title: 'You'
+    });
+
+    let content = "<h6 class=\"marker\">You are here</h6>";
+
+    this.addInfoWindow(marker, content);
+  }
+
+  addInfoWindow(marker, content){
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+  }
 
 }
