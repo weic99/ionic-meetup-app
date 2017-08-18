@@ -1,7 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { LoginPage } from '../../pages/login/login';
+
+declare var google: any;
 
 @Component({
   selector: 'page-home',
@@ -9,8 +11,8 @@ import { LoginPage } from '../../pages/login/login';
 })
 export class HomePage {
   public user: any;
-  public map: any;
-  @ViewChild('map') mapElement;
+  map: any;
+  @ViewChild('map') mapElement: ElementRef;
 
   constructor(
     public navCtrl: NavController,
@@ -41,7 +43,7 @@ export class HomePage {
   }
 
   initMap() {
-    let latLng = new google.maps.latLng(40.750487, -73.976401);
+    let latLng = new google.maps.LatLng(40.750487, -73.976401);
 
     let mapOptions = {
       center: latLng,
