@@ -17,17 +17,13 @@ import { UserProvider } from '../providers/user/user';
 import { ApiProvider } from '../providers/api/api';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 
-import { Camera } from '@ionic-native/camera';
-import { GoogleMaps } from '@ionic-native/google-maps';
-
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
-    LoginPage
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -40,8 +36,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
-    LoginPage
+    TabsPage
   ],
   providers: [
     StatusBar,
@@ -49,9 +44,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
     ApiProvider,
-    FirebaseProvider,
-    Camera,
-    GoogleMaps
+    FirebaseProvider
   ]
 })
 export class AppModule {}
