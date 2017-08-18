@@ -15,7 +15,7 @@ export class UserProvider {
 
   /** Send a POST request to login endpoint */
   login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo);
+    let seq = this.api.post('users/login', accountInfo);
 
     seq
       .map(res => res.json())
@@ -34,7 +34,7 @@ export class UserProvider {
 
   /** Send a POST request to signup endpoint */
   signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo);
+    let seq = this.api.post('users/register', accountInfo);
 
     seq
       .map(res => res.json())

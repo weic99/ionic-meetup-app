@@ -24,7 +24,8 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    SignupPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +39,8 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    SignupPage
   ],
   providers: [
     StatusBar,

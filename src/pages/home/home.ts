@@ -82,15 +82,18 @@ export class HomePage {
 
   match() {
     const userId = this.user.username;
-    // const location1 = { "address" : this.state.userLocationAddress, "coordinates": [0,0] };
-    // const location2 = { "address": this.state.friendId, "coordinates": [0,0] };
+    const location1 = { "address" : "369 Lexington Avenue, New York, NY", "coordinates": [0,0] };
+    const location2 = { "address": this.friendName, "coordinates": [0,0] };
+    console.log('match() with data', {'userId': 'luigi', location1, location2});
     this.User.postMeetup({
-      userId
+      'userId': 'luigi',
+      location1,
+      location2
     })
     .subscribe(res => {
       console.log('match() res', res);
     }, (err) => {
-      console.error('match()', err);
+      console.error('match() err', err);
     });
   }
 
