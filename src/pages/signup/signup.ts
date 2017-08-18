@@ -8,10 +8,11 @@ import { HomePage } from '../../pages/home/home';
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-  public account: { username: string, email: string, password: string } = {
+  public account: { username: string, email: string, password: string, password2: string } = {
     username: undefined,
     email: undefined,
-    password: undefined
+    password: undefined,
+    password2: undefined
   };
 
   private signupErrorString: string = 'Sign up failed';
@@ -31,6 +32,7 @@ export class SignupPage {
 
   signup() {
     this.User.signup(this.account).subscribe((res) => {
+      console.log('redirect to home');
       this.navCtrl.push(HomePage, res);
     }, (err) => {
       // this.navCtrl.push(HomePage);
