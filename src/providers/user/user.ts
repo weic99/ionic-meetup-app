@@ -18,15 +18,15 @@ export class UserProvider {
     let seq = this.api.post('login', accountInfo);
 
     seq
-      .map((res) => res.json())
-      .subscribe((res) => {
+      .map(res => res.json())
+      .subscribe(res => {
         if (res.status === 'success') {
           this._loggedIn(res);
         } else {
           /** fail to login */
         }
       }, (err) => {
-        console.error('login', err);
+        console.error('login()', err);
       });
 
     return seq;
@@ -37,13 +37,13 @@ export class UserProvider {
     let seq = this.api.post('signup', accountInfo);
 
     seq
-      .map((res) => res.json())
-      .subscribe((res) => {
+      .map(res => res.json())
+      .subscribe(res => {
         if (res.status === 'success') {
           this._loggedIn(res);
         }
       }, (err) => {
-        console.error('signup', err);
+        console.error('signup()', err);
       });
 
     return seq;
@@ -57,5 +57,19 @@ export class UserProvider {
   /** Store user data */
   private _loggedIn(res) {
     this._user = res.user;
+  }
+
+  postMeetup(meetupInfo: any) {
+    let seq = this.api.post('two-locations', meetupInfo);
+
+    seq
+      .map(res => res.json())
+      .subscribe(res => {
+        console.log('postMeetup() res', res);
+      }, (err) => {
+        console.error('postMeetup()', err);
+      });
+
+    return seq;
   }
 }

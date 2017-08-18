@@ -22,7 +22,8 @@ export class HomePage {
     public navCtrl: NavController,
     private navParams: NavParams,
     private toast: ToastController,
-    public platform: Platform
+    public platform: Platform,
+    private User: UserProvider
   ) {
     platform.ready().then(() => {
       this.initMap();
@@ -80,7 +81,17 @@ export class HomePage {
   }
 
   match() {
-    return 1;
+    const userId = this.user.username;
+    // const location1 = { "address" : this.state.userLocationAddress, "coordinates": [0,0] };
+    // const location2 = { "address": this.state.friendId, "coordinates": [0,0] };
+    this.User.postMeetup({
+      userId
+    })
+    .subscribe(res => {
+      console.log('match() res', res);
+    }, (err) => {
+      console.error('match()', err);
+    });
   }
 
 }
