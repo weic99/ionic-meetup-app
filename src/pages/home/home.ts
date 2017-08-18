@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Platform  } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { LoginPage } from '../../pages/login/login';
 
@@ -21,9 +21,12 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private navParams: NavParams,
-    private toast: ToastController
+    private toast: ToastController,
+    public platform: Platform
   ) {
-
+    platform.ready().then(() => {
+      this.initMap();
+    });
   }
 
   ionViewWillLoad() {
@@ -36,7 +39,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     /** Google map init */
-    this.initMap();
+    // this.initMap();
   }
 
   initMap() {
@@ -74,6 +77,10 @@ export class HomePage {
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
     });
+  }
+
+  match() {
+    return 1;
   }
 
 }
