@@ -40,7 +40,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     /** Google map init */
-    // this.initMap();
+    this.initMap();
   }
 
   initMap() {
@@ -57,17 +57,18 @@ export class HomePage {
     this.addMarker();
   }
 
-  addMarker(){
+  addMarker(position = this.map.getCenter()){
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: this.map.getCenter(),
+      position: position,
       title: 'You'
     });
 
     let content = "<h6 class=\"marker\">You are here</h6>";
 
     this.addInfoWindow(marker, content);
+    this.markers.push(marker);
   }
 
   addInfoWindow(marker, content){
@@ -92,9 +93,21 @@ export class HomePage {
     })
     .subscribe(res => {
       console.log('match() res', res);
+      console.log('center is', this.map.getCenter());
+      this.addMarker(res.json().midpoint);
+      this.recenter();
     }, (err) => {
       console.error('match() err', err);
     });
   }
 
+  markers = [];
+  bounds = new google.maps.LatLngBounds();
+
+  recenter() {
+    for (var i = 0; i < this.markers.length; i++) {
+      this.bounds.extend(this.markers[i].getPosition());
+    }
+    this.map.fitBounds(this.bounds);
+  }
 }
