@@ -54,7 +54,30 @@ export class HomePage {
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    this.addMarker();
+    /** my location dot */
+    var myloc = new google.maps.Marker({
+        clickable: false,
+        icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+                                                        new google.maps.Size(22,22),
+                                                        new google.maps.Point(0,18),
+                                                        new google.maps.Point(11,11)),
+        shadow: null,
+        zIndex: 999,
+        map: this.map,
+        position: new google.maps.LatLng(40.750487, -73.976401)
+    });
+
+    // circle around myLoc
+    var cityCircle = new google.maps.Circle({
+            strokeColor: '#0080ff',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#0080ff',
+            fillOpacity: 0.35,
+            map: this.map,
+            center: new google.maps.LatLng(40.750487, -73.976401),
+            radius: 100
+    });
   }
 
   addMarker(position = this.map.getCenter()){
