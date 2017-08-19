@@ -127,10 +127,10 @@ export class HomePage {
       this.markers.push(friendLoc);
 
       new google.maps.Circle({
-              strokeColor: '#ffff00',
+              strokeColor: '#006600',
               strokeOpacity: 0.8,
               strokeWeight: 2,
-              fillColor: '#ffff00',
+              fillColor: '#006600',
               fillOpacity: 0.35,
               map: this.map,
               center: friendLoc.position,
