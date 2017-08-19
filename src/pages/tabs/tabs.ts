@@ -11,9 +11,10 @@ import { LoginPage } from '../login/login';
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
+  tab1Root = LoginPage;
   tab2Root = SignupPage;
-  tab3Root = LoginPage;
+  tab3Root = HomePage;
+  //tab4Root = LandingPage
 
   constructor() {
 
