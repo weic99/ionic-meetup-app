@@ -17,6 +17,7 @@ export class HomePage {
   /** Matching bariables */
   friendName: string;
   userLocationAddress: string;
+  myCir: any;
 
   constructor(
     public navCtrl: NavController,
@@ -55,7 +56,7 @@ export class HomePage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
     /** my location dot */
-    var myloc = new google.maps.Marker({
+    let myLoc = new google.maps.Marker({
         icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
                                                         new google.maps.Size(22,22),
                                                         new google.maps.Point(0,18),
@@ -64,17 +65,17 @@ export class HomePage {
         map: this.map,
         position: new google.maps.LatLng(40.750487, -73.976401)
     });
-    this.markers.push(myloc);
+    this.markers.push(myLoc);
     // circle around myLoc
-    var cityCircle = new google.maps.Circle({
+    this.myCir = new google.maps.Circle({
             strokeColor: '#0080ff',
             strokeOpacity: 0.8,
             strokeWeight: 2,
             fillColor: '#0080ff',
             fillOpacity: 0.35,
             map: this.map,
-            center: new google.maps.LatLng(40.750487, -73.976401),
-            radius: 100
+            center: myLoc.position,
+            radius: 500
     });
   }
 
@@ -116,6 +117,26 @@ export class HomePage {
       console.log('match() res', res);
       console.log('center is', this.map.getCenter());
       this.addMarker(res.json().midpoint);
+
+      let friendLoc = new google.maps.Marker({
+          icon: new google.maps.MarkerImage('//lh3.ggpht.com/XAjhu-6znztoLTr9AxuwM5v0wilaKiUJJMLKEiiFMn6lGOmBmY1Km7Kt1ohildzlIdWgkwy_5g=w9-h9'),
+          zIndex: 999,
+          map: this.map,
+          position: res.json().user_locations.location2
+      });
+      this.markers.push(friendLoc);
+
+      new google.maps.Circle({
+              strokeColor: '#ffff00',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#ffff00',
+              fillOpacity: 0.35,
+              map: this.map,
+              center: friendLoc.position,
+              radius: 500
+      });
+
       this.recenter();
     }, (err) => {
       console.error('match() err', err);
